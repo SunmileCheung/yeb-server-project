@@ -13,21 +13,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @Author C
- * @Description当未登录或者token失效时访问接口时，自定义的返回结果
- * @Date create in 2023/6/30 21:57
+ * 当未登录或者token失效时访问接口时，自定义的返回结果
  */
 @Component
 public class RestAuthorizationEntryPoint implements AuthenticationEntryPoint {
+
+
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
-        PrintWriter writer = response.getWriter();
-        RespBean bean = RespBean.error("未登录，请登录");
+        PrintWriter out = response.getWriter();
+        RespBean bean = RespBean.error("尚未登录，请登录！");
         bean.setCode(401);
-        writer.write(new ObjectMapper().writeValueAsString(bean));
-        writer.flush();
-        writer.close();
+        out.write(new ObjectMapper().writeValueAsString(bean));
+        out.flush();
+        out.close();
     }
 }

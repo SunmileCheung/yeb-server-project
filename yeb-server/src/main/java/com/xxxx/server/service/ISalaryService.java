@@ -1,5 +1,7 @@
 package com.xxxx.server.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.xxxx.server.pojo.Salary;
 import com.xxxx.server.pojo.RespBean;
 import com.xxxx.server.pojo.Salary;
 import com.baomidou.mybatisplus.extension.service.IService;

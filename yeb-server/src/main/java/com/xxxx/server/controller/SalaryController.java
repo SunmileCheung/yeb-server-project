@@ -1,6 +1,7 @@
 package com.xxxx.server.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xxxx.server.pojo.RespBean;
 import com.xxxx.server.pojo.Salary;
 import com.xxxx.server.service.ISalaryService;
@@ -17,10 +18,10 @@ import java.util.List;
  * </p>
  *
  * @author huyelin
- * @since 2023-06-30
+ * @since 2022-06-23
  */
 @RestController
-@RequestMapping("/system/salary/sob")
+@RequestMapping("/salary/sob")
 public class SalaryController {
 
     @Autowired
@@ -31,23 +32,44 @@ public class SalaryController {
     public List<Salary> getAllSalaries(){
         return salaryService.list();
     }
+/*
+    @ApiOperation(value = "添加工资账套")
+    @PostMapping("/")
+    public RespBean addSalary(@RequestBody Salary salary){
+        salary.setCreateDate(LocalDateTime.now());
+        if (salaryService.save(salary)){
+            return RespBean.success("添加成功！");
+        }
+        return RespBean.error("添加失败！");
+    }*/
 
     @ApiOperation(value = "添加工资账套")
     @PostMapping("/")
     public RespBean addSalaries(@RequestBody Salary salary){
         return salaryService.addSalaries(salary);
     }
+    @ApiOperation(value = "删除工资账套")
+    @DeleteMapping("/{id}")
+    public RespBean deleteSalary(@PathVariable Integer id){
+        if (salaryService.removeById(id)){
+            return RespBean.success("删除成功！");
+        }
+        return RespBean.error("删除失败！");
+    }
+/*
+    @ApiOperation(value = "更新工资账套")
+    @PutMapping("/")
+    public RespBean updateSalaryById(@RequestBody Salary salary){
+        if (salaryService.updateById(salary)){
+            return RespBean.success("更新成功！");
+        }
+        return RespBean.error("更新失败！");
+    }*/
 
     @ApiOperation(value = "更新工资账套")
     @PutMapping("/")
     public RespBean updateSalaries(@RequestBody Salary salary){
         return salaryService.updateSalaries(salary);
-    }
-
-    @ApiOperation(value = "删除工资账套")
-    @DeleteMapping("/{id}")
-    public RespBean deleteSalaries(@PathVariable Integer id){
-        return salaryService.deleteSalaries(id);
     }
 
 }

@@ -1,6 +1,11 @@
 package com.xxxx.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xxxx.server.mapper.MenuRoleMapper;
+import com.xxxx.server.pojo.MenuRole;
+import com.xxxx.server.pojo.RespBean;
+import com.xxxx.server.service.IMenuRoleService;
 import com.xxxx.server.pojo.MenuRole;
 import com.xxxx.server.mapper.MenuRoleMapper;
 import com.xxxx.server.pojo.RespBean;
@@ -16,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  * </p>
  *
  * @author huyelin
- * @since 2023-06-30
+ * @since 2022-06-23
  */
 @Service
 public class MenuRoleServiceImpl extends ServiceImpl<MenuRoleMapper, MenuRole> implements IMenuRoleService {
@@ -26,10 +31,6 @@ public class MenuRoleServiceImpl extends ServiceImpl<MenuRoleMapper, MenuRole> i
 
     /**
      * 更新角色菜单
-     * 根据rid删除菜单
-     * 判断如果传来的菜单为空
-     *      空:删除成功
-     *      非空:添加角色id和菜单id到角色菜单表中
      * @param rid
      * @param mids
      * @return
@@ -38,13 +39,13 @@ public class MenuRoleServiceImpl extends ServiceImpl<MenuRoleMapper, MenuRole> i
     @Transactional
     public RespBean updateMenuRole(Integer rid, Integer[] mids) {
         menuRoleMapper.delete(new QueryWrapper<MenuRole>().eq("rid",rid));
-        if (mids==null||mids.length==0){
-            return RespBean.success("更新成功");
+        if (null == mids || 0 == mids.length) {
+            return RespBean.success("更新成功！");
         }
-        Integer result= menuRoleMapper.insertRecord(rid,mids);
-        if (mids.length==result){
-            return RespBean.success("更新成功");
+        Integer result = menuRoleMapper.insertRecord(rid, mids);
+        if (result==mids.length){
+            return RespBean.success("更新成功！");
         }
-        return RespBean.error("更新失败");
+        return RespBean.error("更新失败！");
     }
 }

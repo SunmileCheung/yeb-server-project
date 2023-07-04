@@ -15,9 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author C
- * @Description
- * @Date create in 2023/7/1 8:42
+ * Swagger2配置类
  */
 @Configuration
 @EnableSwagger2
@@ -33,13 +31,14 @@ public class Swagger2Config {
                 .build()
                 .securityContexts(securityContexts())
                 .securitySchemes(securitySchemes());
+
     }
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
                 .title("云E办接口文档")
                 .description("云E办接口文档")
-                .contact(new Contact("C","http:localhost:8081/doc.html","xxxx@xxxx.com"))
+                .contact(new Contact("xxxx","http:localhost:8801/doc.html","xxxx@xxxx.com"))
                 .version("1.0")
                 .build();
     }
@@ -53,24 +52,26 @@ public class Swagger2Config {
     }
 
     private List<SecurityContext> securityContexts(){
+        //设置需要登录认证的路径
         List<SecurityContext> result = new ArrayList<>();
         result.add(getContextByPath("/hello/.*"));
         return result;
     }
 
-    private SecurityContext getContextByPath(String s) {
+    private SecurityContext getContextByPath(String pathRegex) {
         return SecurityContext.builder()
                 .securityReferences(defaultAuth())
-                .forPaths(PathSelectors.regex(s))
+                .forPaths(PathSelectors.regex(pathRegex))
                 .build();
     }
 
     private List<SecurityReference> defaultAuth() {
         List<SecurityReference> result = new ArrayList<>();
-        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");;
+        AuthorizationScope authorizationScope = new AuthorizationScope("global","accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         result.add(new SecurityReference("Authorization",authorizationScopes));
         return result;
     }
+
 }

@@ -1,9 +1,9 @@
 package com.xxxx.server.service.impl;
 
-import com.xxxx.server.pojo.SysMsgContent;
-import com.xxxx.server.mapper.SysMsgContentMapper;
-import com.xxxx.server.service.ISysMsgContentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xxxx.server.mapper.SysMsgContentMapper;
+import com.xxxx.server.pojo.SysMsgContent;
+import com.xxxx.server.service.ISysMsgContentService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author huyelin
- * @since 2023-06-30
+ * @since 2022-06-23
  */
 @Service
 public class SysMsgContentServiceImpl extends ServiceImpl<SysMsgContentMapper, SysMsgContent> implements ISysMsgContentService {

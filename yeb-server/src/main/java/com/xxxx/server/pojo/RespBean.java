@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 /**
- * @Author C
- * @Description
- * @Date create in 2023/6/30 17:22
+ * 公共返回对象
  */
 @Data
 @NoArgsConstructor
@@ -52,4 +52,5 @@ public class RespBean {
     public static RespBean error(String message,Object obj){
         return new RespBean(500,message,obj);
     }
+
 }

@@ -1,7 +1,7 @@
 package com.xxxx.server.mapper;
 
-import com.xxxx.server.pojo.MenuRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xxxx.server.pojo.MenuRole;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
  * </p>
  *
  * @author huyelin
- * @since 2023-06-30
+ * @since 2022-06-23
  */
 public interface MenuRoleMapper extends BaseMapper<MenuRole> {
 
@@ -18,7 +18,10 @@ public interface MenuRoleMapper extends BaseMapper<MenuRole> {
      * 更新角色菜单
      * @param rid
      * @param mids
+<<<<<<< HEAD
      * @return
+=======
+>>>>>>> 初始化仓库提交
      */
     Integer insertRecord(@Param("rid") Integer rid, @Param("mids") Integer[] mids);
 }

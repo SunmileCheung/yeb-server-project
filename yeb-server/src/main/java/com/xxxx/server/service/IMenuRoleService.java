@@ -1,7 +1,7 @@
 package com.xxxx.server.service;
 
-import com.xxxx.server.pojo.MenuRole;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xxxx.server.pojo.MenuRole;
 import com.xxxx.server.pojo.RespBean;
 
 /**
@@ -10,12 +10,12 @@ import com.xxxx.server.pojo.RespBean;
  * </p>
  *
  * @author huyelin
- * @since 2023-06-30
+ * @since 2022-06-23
  */
 public interface IMenuRoleService extends IService<MenuRole> {
 
     /**
-     *  更新角色菜单
+     * 更新角色菜单
      * @param rid
      * @param mids
      * @return

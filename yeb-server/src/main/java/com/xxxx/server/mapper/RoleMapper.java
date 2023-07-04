@@ -1,7 +1,7 @@
 package com.xxxx.server.mapper;
 
-import com.xxxx.server.pojo.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xxxx.server.pojo.Role;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * </p>
  *
  * @author huyelin
- * @since 2023-06-30
+ * @since 2022-06-23
  */
 public interface RoleMapper extends BaseMapper<Role> {
 

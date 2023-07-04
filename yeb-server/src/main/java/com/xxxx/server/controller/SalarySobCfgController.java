@@ -49,4 +49,13 @@ public class SalarySobCfgController {
     public RespBean updateEmployeeSalary(Integer eid,Integer sid){
         return salarySobCfgService.updateEmployeeSalary(eid,sid);
     }
+
+   /* @ApiOperation(value = "更新员工账套")
+    @PutMapping("/")
+    public RespBean updateEmployeeSalary(Integer eid,Integer sid){
+        if (employeeService.update(new UpdateWrapper<Employee>().set("salaryId",sid).eq("id",eid))){
+            return RespBean.success("更新成功！");
+        }
+        return RespBean.error("更新失败！");
+    }*/
 }

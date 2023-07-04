@@ -1,5 +1,6 @@
 package com.xxxx.server.controller;
 
+
 import com.xxxx.server.pojo.Admin;
 import com.xxxx.server.pojo.AdminLoginParam;
 import com.xxxx.server.pojo.RespBean;
@@ -16,41 +17,37 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 /**
- * @Author C
- * @Description
- * @Date create in 2023/6/30 19:22
+ * 登录
  */
+
 @Api(tags = "LoginController")
 @RestController
 public class LoginController {
-
     @Autowired
     private IAdminService adminService;
 
-
-    @ApiOperation(value = "登录之后返回token")
+    @ApiOperation(value = "登录之后返回token")    //@RequestBody
     @PostMapping("/login")
     public RespBean login(@RequestBody AdminLoginParam adminLoginParam, HttpServletRequest request){
         return adminService.login(adminLoginParam.getUsername(),adminLoginParam.getPassword(),adminLoginParam.getCode(),request);
     }
 
-    @ApiOperation(value = "获取当前登录用户信息")
+    @ApiOperation(value = "获取当前登录用户的信息")
     @GetMapping("/admin/info")
     public Admin getAdminInfo(Principal principal){
         if (null==principal){
             return null;
         }
-        String userName = principal.getName();
-        Admin admin = adminService.getAdminByUserName(userName);
-        //防止密码泄露
+        String username = principal.getName();
+        Admin admin = adminService.getAdminByUserName(username);
         admin.setPassword(null);
-        admin.setRoles(adminService.getRoles(admin.getId()));
+        admin.setRoles(adminService.getRoles(admin.getId()));//
         return admin;
     }
 
     @ApiOperation(value = "退出登录")
     @PostMapping("/logout")
     public RespBean logout(){
-        return RespBean.success("注销成功");
+        return RespBean.success("注销成功！");
     }
 }

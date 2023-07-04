@@ -1,17 +1,17 @@
 package com.xxxx.server.pojo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import java.util.List;
-
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author huyelin
- * @since 2023-06-30
+ * @since 2022-06-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -62,12 +62,10 @@ public class Menu implements Serializable {
     private Boolean enabled;
 
     @ApiModelProperty(value = "子菜单")
-    @TableField(exist = false)
+    @TableField(exist = false) //表明表里面没有这个字段
     private List<Menu> children;
-    @ApiModelProperty(value = "角色")
+
+    @ApiModelProperty(value = "角色列表")
     @TableField(exist = false)
     private List<Role> roles;
-
-
-
 }

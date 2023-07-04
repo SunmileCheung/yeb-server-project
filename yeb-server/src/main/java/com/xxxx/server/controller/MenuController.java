@@ -2,12 +2,12 @@ package com.xxxx.server.controller;
 
 
 import com.xxxx.server.pojo.Menu;
+import com.xxxx.server.service.IAdminService;
 import com.xxxx.server.service.IMenuService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,6 +18,7 @@ import java.util.List;
  * </p>
  *
  * @author huyelin
+ * @since 2022-06-23
  * @since 2023-06-30
  */
 @RestController
@@ -29,7 +30,7 @@ public class MenuController {
 
     @ApiOperation(value = "通过用户id查询菜单列表")
     @GetMapping("/menu")
-    public List<Menu> getMenuByAdminId(){
-        return menuService.getMenuByAdminId();
+    public List<Menu> getMenusByAdminId(){
+        return menuService.getMenusByAdminId();
     }
 }

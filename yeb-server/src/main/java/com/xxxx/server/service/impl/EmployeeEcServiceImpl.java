@@ -1,5 +1,9 @@
 package com.xxxx.server.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xxxx.server.mapper.EmployeeEcMapper;
+import com.xxxx.server.pojo.EmployeeEc;
+import com.xxxx.server.service.IEmployeeEcService;
 import com.xxxx.server.pojo.EmployeeEc;
 import com.xxxx.server.mapper.EmployeeEcMapper;
 import com.xxxx.server.service.IEmployeeEcService;
@@ -12,7 +16,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author huyelin
- * @since 2023-06-30
+ * @since 2022-06-23
  */
 @Service
 public class EmployeeEcServiceImpl extends ServiceImpl<EmployeeEcMapper, EmployeeEc> implements IEmployeeEcService {
