@@ -17,7 +17,7 @@ import java.util.List;
  * 员工账套
  */
 @RestController
-@RequestMapping("salary/sobcfg")
+@RequestMapping("/salary/sobcfg")
 public class SalarySobCfgController {
     @Autowired
     private ISalaryService salaryService;
@@ -33,8 +33,10 @@ public class SalarySobCfgController {
     @ApiOperation(value = "获取所有员工账套")
     @GetMapping("/")
     public RespPageBean getEmployeeWithSalary(@RequestParam(defaultValue = "1") Integer currentPage,
-                                              @RequestParam(defaultValue = "10") Integer size){
-        return employeeService.getEmployeeWithSalary(currentPage,size);
+                                              @RequestParam(defaultValue = "10") Integer size,
+                                              @RequestParam(value = "empName",required = false)String empName,
+                                              @RequestParam(value = "deptName",required = false)String dname){
+        return employeeService.getEmployeeWithSalary(currentPage,size,empName,dname);
     }
 
     @ApiOperation(value = "更新员工账套")

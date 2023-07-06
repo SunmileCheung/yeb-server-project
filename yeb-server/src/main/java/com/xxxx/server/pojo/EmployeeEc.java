@@ -1,6 +1,7 @@
 package com.xxxx.server.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -50,6 +51,11 @@ public class EmployeeEc implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String remark;
+
+    @ApiModelProperty("员工姓名")
+    @TableField(exist = false)
+    private String ename;
+
 
 
 }

@@ -18,4 +18,19 @@
         id, eid, asDate, beforeSalary, afterSalary, reason, remark
     </sql>
 
+    <select id="searchByPageList" resultMap="BaseResultMap">
+        select tsa.id, eid, asDate, beforeSalary, afterSalary, reason, remark, te.name as ename,td.name as dname
+        from t_salary_adjust tsa
+                 left join t_employee te on te.id = tsa.eid
+                 left join t_department td on te.departmentId = td.id
+        <where>
+            <if test="empName != null and empName != ''">
+                te.name like concat('%',#{empName},'%')
+            </if>
+            <if test="deptName != null and deptName != ''">
+               and td.name like concat('%',#{deptName},'%')
+            </if>
+        </where>
+    </select>
+
 </mapper>

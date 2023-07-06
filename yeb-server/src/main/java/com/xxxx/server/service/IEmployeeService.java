@@ -53,5 +53,5 @@ public interface IEmployeeService extends IService<Employee> {
      * @param size
      * @return
      */
-    RespPageBean getEmployeeWithSalary(Integer currentPage, Integer size);
+    RespPageBean getEmployeeWithSalary(Integer currentPage, Integer size,String empName,String dname);
 }

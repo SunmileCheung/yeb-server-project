@@ -25,4 +25,16 @@
         id, basicSalary, bonus, lunchSalary, trafficSalary, allSalary, pensionBase, pensionPer, createDate, medicalBase, medicalPer, accumulationFundBase, accumulationFundPer, name
     </sql>
 
+    <select id="getAllSalaryOfAllEmp" resultType="com.xxxx.server.pojo.SalaryDto">
+        SELECT
+            s.id,
+            e.id as eid,
+            e.name as ename,(
+                    s.basicSalary + s.lunchSalary + s.trafficSalary + s.pensionBase + s.medicalBase + s.accumulationFundBase
+                ) allSalary
+        FROM
+            t_employee e
+                LEFT JOIN t_salary s ON e.salaryId = s.id
+    </select>
+
 </mapper>

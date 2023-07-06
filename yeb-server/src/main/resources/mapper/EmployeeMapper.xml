@@ -73,6 +73,7 @@
             <result column="sname" property="name"></result>
             <result column="saccumulationFundBase" property="accumulationFundBase"></result>
             <result column="saccumulationFundPer" property="accumulationFundPer"></result>
+            <result column="screateDate" property="createDate"></result>
         </association>
         <association property="department" javaType="com.xxxx.server.pojo.Department">
             <result column="dname" property="name"></result>
@@ -190,11 +191,20 @@
             s.medicalBase AS smedicalBase,
             s.medicalPer AS smedicalPer,
             s.accumulationFundBase AS saccumulationFundBase,
-            s.accumulationFundPer AS saccumulationFundPer
+            s.accumulationFundPer AS saccumulationFundPer,
+            s.createDate as screateDate
         FROM
             t_employee e
             LEFT JOIN t_salary s ON e.salaryId = s.id
             LEFT JOIN t_department d ON e.departmentId = d.id
+        <where>
+            <if test="empName != null and empName != ''">
+                e.name like concat('%',#{empName},'%')
+            </if>
+            <if test="deptName != null and deptName != ''">
+                and d.`name` like concat('%',#{deptName},'%')
+            </if>
+        </where>
         ORDER BY
             e.id
     </select>
