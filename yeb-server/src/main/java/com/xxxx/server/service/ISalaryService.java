@@ -2,6 +2,9 @@ package com.xxxx.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xxxx.server.pojo.Salary;
+import com.xxxx.server.pojo.SalaryDto;
+
+import java.util.List;
 import com.xxxx.server.pojo.RespBean;
 import com.xxxx.server.pojo.Salary;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -24,4 +27,6 @@ public interface ISalaryService extends IService<Salary> {
 
     //删除工资账套
     RespBean deleteSalaries(Integer id);
+    public List<SalaryDto> getAllSalaryOfAllEmp();
+
 }

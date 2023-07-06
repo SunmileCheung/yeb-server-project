@@ -49,7 +49,7 @@ public interface IEmployeeService extends IService<Employee> {
 
     /**
      * 查询员工
-     * @param id
+     * @param o
      */
     List<Employee> getEmployee(Integer id);
 
@@ -68,4 +68,5 @@ public interface IEmployeeService extends IService<Employee> {
 
     //多条件查询
     RespPageBean getSalarySearch(Integer currentPage, Integer size, String ename, String dname);
+    RespPageBean getEmployeeWithSalary(Integer currentPage, Integer size,String empName,String dname);
 }

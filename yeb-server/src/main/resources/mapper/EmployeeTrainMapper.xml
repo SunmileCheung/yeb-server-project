@@ -16,4 +16,22 @@
         id, eid, trainDate, trainContent, remark
     </sql>
 
+    <select id="getEmployeeTranInfoByPage" resultType="com.xxxx.server.pojo.EmployeeTrain">
+
+        SELECT tet.*,te.name as ename,td.name as deptName from t_employee_train tet
+               left join t_employee te on tet.eid = te.id
+               left join t_department td on te.departmentId = td.id
+        <where>
+            <if test="empName != null and empName != ''">
+                te.name like concat('%',#{empName},'%')
+            </if>
+            <if test="deptName != null and deptName != ''">
+               and td.name like concat('%',#{deptName},'%')
+            </if>
+            <if test="startDate != null and endDate != null">
+                and tet.trainDate between #{startDate} and #{endDate}
+            </if>
+        </where>
+    </select>
+
 </mapper>

@@ -12,10 +12,33 @@
         <result column="ecType" property="ecType" />
         <result column="remark" property="remark" />
     </resultMap>
-
+    <resultMap id="EmployeeEcInfoWithBasicInfo" type="com.xxxx.server.pojo.EmployeeEc">
+        <result property="ename" column="ename"/>
+    </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, eid, ecDate, ecReason, ecPoint, ecType, remark
     </sql>
+
+    <select id="getEmployeeEcInfos" resultMap="EmployeeEcInfoWithBasicInfo">
+        select tee.*,te.name as ename
+        from t_employee_ec tee
+                 left join t_employee te
+                           on tee.eid = te.id
+        <where>
+            <if test="ename != null and ename != ''">
+             te.name like concat('%',#{ename},'%')
+            </if>
+            <if test="ecType != null">
+                and tee.ecType = #{ecType}
+            </if>
+        </where>
+    </select>
+
+    <select id="getCurrentMonthEmployeeEcInfos" resultType="com.xxxx.server.pojo.EmployeeEc">
+        select *
+        from t_employee_ec
+        where DATE_SUB(CURDATE(), INTERVAL '30' DAY) &lt; ecDate
+    </select>
 
 </mapper>

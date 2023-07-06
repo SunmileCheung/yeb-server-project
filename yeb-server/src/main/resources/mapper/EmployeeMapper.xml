@@ -58,31 +58,27 @@
         </association>
     </resultMap>
 
-    
-
-    <resultMap id="EmployeeWithSalary" type="com.xxxx.server.pojo.Employee"
-               extends="BaseResultMap">
+    <resultMap id="EmployeeWithSalary" type="com.xxxx.server.pojo.Employee" extends="BaseResultMap">
         <association property="salary" javaType="com.xxxx.server.pojo.Salary">
-            <id column="sid" property="id"/>
-            <result column="sbasicSalary" property="basicSalary"/>
-            <result column="sbonus" property="bonus"/>
-            <result column="slunchSalary" property="lunchSalary"/>
-            <result column="strafficSalary" property="trafficSalary"/>
-            <result column="sallSalary" property="allSalary"/>
-            <result column="spensionBase" property="pensionBase"/>
-            <result column="spensionPer" property="pensionPer"/>
-            <result column="smedicalBase" property="medicalBase"/>
-            <result column="smedicalPer" property="medicalPer"/>
-            <result column="saccumulationFundBase"
-                    property="accumulationFundBase"/>
-            <result column="saccumulationFundPer"
-                    property="accumulationFundPer"/>
-            <result column="sname" property="name"/>
+            <id column="sid" property="id" />
+            <result column="sbasicSalary" property="basicSalary" />
+            <result column="sbonus" property="bonus" />
+            <result column="slunchSalary" property="lunchSalary" />
+            <result column="strafficSalary" property="trafficSalary" />
+            <result column="sallSalary" property="allSalary" />
+            <result column="spensionBase" property="pensionBase" />
+            <result column="spensionPer" property="pensionPer" />
+            <result column="smedicalBase" property="medicalBase" />
+            <result column="smedicalPer" property="medicalPer" />
+            <result column="sname" property="name"></result>
+            <result column="saccumulationFundBase" property="accumulationFundBase"></result>
+            <result column="saccumulationFundPer" property="accumulationFundPer"></result>
+            <result column="screateDate" property="createDate"></result>
         </association>
-        <association property="department"
-                     javaType="com.xxxx.server.pojo.Department">
-            <result column="dname" property="name"/>
+        <association property="department" javaType="com.xxxx.server.pojo.Department">
+            <result column="dname" property="name"></result>
         </association>
+
     </resultMap>
 
     <resultMap id="SalarySearch" type="com.xxxx.server.pojo.Employee" extends="BaseResultMap">
@@ -103,9 +99,7 @@
             <result column="dname" property="name"/>
         </association>
 
-     </resultMap>
-
-
+    </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
@@ -217,11 +211,20 @@
             s.medicalBase AS smedicalBase,
             s.medicalPer AS smedicalPer,
             s.accumulationFundBase AS saccumulationFundBase,
-            s.accumulationFundPer AS saccumulationFundPer
+            s.accumulationFundPer AS saccumulationFundPer,
+            s.createDate as screateDate
         FROM
             t_employee e
             LEFT JOIN t_salary s ON e.salaryId = s.id
             LEFT JOIN t_department d ON e.departmentId = d.id
+        <where>
+            <if test="empName != null and empName != ''">
+                e.name like concat('%',#{empName},'%')
+            </if>
+            <if test="deptName != null and deptName != ''">
+                and d.`name` like concat('%',#{deptName},'%')
+            </if>
+        </where>
         ORDER BY
             e.id
     </select>

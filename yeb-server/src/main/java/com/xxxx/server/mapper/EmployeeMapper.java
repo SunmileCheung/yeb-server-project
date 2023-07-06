@@ -51,4 +51,12 @@ public interface EmployeeMapper extends BaseMapper<Employee> {
     IPage<Employee> getSalarySearch(Page<Employee> page, @Param("ename") String ename,@Param("dname") String dname);
 
 
+    /**
+     * 获取所有员工账套
+     * @param page
+     * @return
+     */
+    IPage<Employee> getEmployeeWithSalary(Page<Employee> page,
+                                          @Param("empName")String empName,
+                                          @Param("deptName")String deptName);
 }

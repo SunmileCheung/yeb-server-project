@@ -20,9 +20,6 @@ package com.xxxx.server.controller;
         import java.net.URLEncoder;
         import java.time.LocalDate;
         import java.util.List;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -30,18 +27,12 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author huyelin
-<<<<<<< HEAD
- * @since 2023-06-30
-=======
  * @since 2022-06-23
->>>>>>> 初始化仓库提交
  */
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 
-<<<<<<< HEAD
-=======
     @Autowired
     private IEmployeeService employeeService;
     @Autowired
@@ -192,5 +183,28 @@ public class EmployeeController {
         }
         return RespBean.error("导入失败！");
     }
->>>>>>> 初始化仓库提交
+
+    @ApiOperation("分页查询员工信息")
+    @GetMapping("/info")
+    public RespPageBean getEmployeeInfos(@RequestParam(value = "empName",required = false) String empName,
+                                         @RequestParam(value = "pageSize",required = false) Integer pageSize,
+                                         @RequestParam(value = "currentPage",required = false) Integer currentPage){
+        Employee employee = new Employee();
+        employee.setName(empName);
+        RespPageBean employeeByPage = employeeService.getEmployeeByPage(currentPage, pageSize, employee, null);
+        return employeeByPage;
+    }
+
+    @ApiOperation("更新员工的工资标准")
+    @PutMapping("/updateSalary")
+    public RespBean updateEmployeeSalary(@RequestParam("empId") Integer empId,
+                                         @RequestParam("salaryId")Integer salaryId){
+        Employee employee = new Employee();
+        employee.setId(empId);
+        employee.setSalaryId(salaryId);
+        if (employeeService.updateById(employee)) {
+            return RespBean.success("员工薪资信息更新成功");
+        }
+        return RespBean.error("员工薪资信息更新失败");
+    }
 }

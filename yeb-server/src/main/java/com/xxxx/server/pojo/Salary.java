@@ -1,6 +1,7 @@
 package com.xxxx.server.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -75,5 +76,12 @@ public class Salary implements Serializable {
     @ApiModelProperty(value = "名称")
     private String name;
 
+    @ApiModelProperty("员工姓名")
+    @TableField(exist = false)
+    private String ename;
+
+    @ApiModelProperty("员工id")
+    @TableField(exist = false)
+    private Integer eid;
 
 }

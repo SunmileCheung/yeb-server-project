@@ -18,4 +18,18 @@
         id, eid, afterDepId, afterJobId, removeDate, reason, remark
     </sql>
 
+    <select id="getEmployeeRemoveInfosPage" resultType="com.xxxx.server.vo.EmployeeRemoveVO">
+
+        SELECT te.id as eid,te.name as ename,td.name as dname,tp.name as pname,ts.id as sid,ts.name as salaryName
+        FROM t_employee te
+                 left join t_department td on te.departmentId = td.id
+                 left join t_position tp on tp.id = te.posId
+                 left join t_salary ts on te.salaryId = ts.id
+        <where>
+            <if test="ename != null and ename != ''">
+                te.name like concat('%',#{ename},'%')
+            </if>
+        </where>
+    </select>
+
 </mapper>

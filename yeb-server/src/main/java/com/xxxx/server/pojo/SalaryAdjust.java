@@ -1,6 +1,7 @@
 package com.xxxx.server.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -50,6 +51,14 @@ public class SalaryAdjust implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String remark;
+
+    @ApiModelProperty(value = "员工名称")
+    @TableField(exist = false)
+    private String ename;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField(exist = false)
+    private String dname;
 
 
 }
