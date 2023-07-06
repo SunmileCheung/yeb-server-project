@@ -4,7 +4,6 @@ import com.xxxx.server.pojo.Menu;
 import com.xxxx.server.pojo.Role;
 import com.xxxx.server.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -14,11 +13,11 @@ import org.springframework.util.AntPathMatcher;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * @Author C
- * @Description
- * @Date create in 2023/7/1 16:01
+ * 权限控制
+ * 根据请求url分析请求所需的角色
  */
 @Component
 public class CustomFilter implements FilterInvocationSecurityMetadataSource {
@@ -36,11 +35,11 @@ public class CustomFilter implements FilterInvocationSecurityMetadataSource {
         for (Menu menu : menus) {
             //判断请求url与菜单角色是否匹配
             if (antPathMatcher.match(menu.getUrl(),requestUrl)){
-                String[] strings = menu.getRoles().stream().map(Role::getName).toArray(String[]::new);
-                return SecurityConfig.createList(strings);
+                String[] str = menu.getRoles().stream().map(Role::getName).toArray(String[]::new);
+                return SecurityConfig.createList(str);
             }
         }
-        //没有匹配的url默认登陆即可访问
+        //没匹配的url默认登录即可访问
         return SecurityConfig.createList("ROLE_LOGIN");
     }
 
@@ -50,7 +49,7 @@ public class CustomFilter implements FilterInvocationSecurityMetadataSource {
     }
 
     @Override
-    public boolean supports(Class<?> clazz) {
+    public boolean supports(Class<?> aClass) {
         return false;
     }
 }

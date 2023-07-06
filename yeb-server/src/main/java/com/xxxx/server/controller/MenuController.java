@@ -21,7 +21,7 @@ import java.util.List;
  * @since 2023-06-30
  */
 @RestController
-@RequestMapping("/system/cfg")
+@RequestMapping("/system/config")
 public class MenuController {
 
     @Autowired

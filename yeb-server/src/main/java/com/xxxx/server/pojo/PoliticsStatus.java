@@ -11,10 +11,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
- * 
- * </p>
- *
  * @author huyelin
  * @since 2023-06-30
  */

@@ -1,10 +1,13 @@
 package com.xxxx.server.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -38,6 +41,7 @@ public class Employee implements Serializable {
     @ApiModelProperty(value = "性别")
     private String gender;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     @ApiModelProperty(value = "出生日期")
     private LocalDate birthday;
 
@@ -116,5 +120,19 @@ public class Employee implements Serializable {
     @ApiModelProperty(value = "工资账套ID")
     private Integer salaryId;
 
+    @ApiModelProperty(value = "工资账套")
+    @TableField(exist = false)
+    private Salary salary;
 
+    @ApiModelProperty(value = "部门")
+    @TableField(exist = false)
+    private Department department;
+
+    @ApiModelProperty(value = "调薪")
+    @TableField(exist = false)
+    private SalarySearch salarySearch;
+
+    @ApiModelProperty(value = "调薪表")
+    @TableField(exist = false)
+    private SalaryAdjust salaryAdjust;
 }

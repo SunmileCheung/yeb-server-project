@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,16 +15,19 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
+ * <p>
+ * 
+ * </p>
+ *
  * @author huyelin
- * 职位
- * @since 2023-06-30
+ * @since 2023-07-03
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_position")
-@ApiModel(value="Position对象", description="")
-public class Position implements Serializable {
+@TableName("t_salary_mouth")
+@ApiModel(value="SalaryMouth对象", description="")
+public class SalaryMouth implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,15 +35,21 @@ public class Position implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "职位")
+    @ApiModelProperty(value = "员工姓名")
     private String name;
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createDate;
+    @ApiModelProperty(value = "应发工资")
+    private Double grossPay;
 
-    @ApiModelProperty(value = "是否启用")
-    private Boolean enabled;
+    @ApiModelProperty(value = "实发工资")
+    private Double takehomePay;
+
+    @ApiModelProperty(value = "原因")
+    private String reason;
+
+    @JsonFormat(pattern = "yyyy-MM",timezone = "Asia/Shanghai")
+    @ApiModelProperty(value = "日期")
+    private LocalDateTime createDate;
 
 
 }

@@ -1,5 +1,6 @@
 package com.xxxx.server.service;
 
+import com.xxxx.server.pojo.RespBean;
 import com.xxxx.server.pojo.Salary;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISalaryService extends IService<Salary> {
 
+    //更新工资账套
+    RespBean updateSalaries(Salary salary);
+
+    //添加工资账套
+    RespBean addSalaries(Salary salary);
+
+    //删除工资账套
+    RespBean deleteSalaries(Integer id);
 }

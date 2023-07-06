@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.server.mapper.SalaryDateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxxx.server.pojo.SalaryDate">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="date" property="date" />
+        <result column="sal" property="sal" />
+        <result column="award" property="award" />
+        <result column="punishment" property="punishment" />
+    </resultMap>
+    <resultMap id="AllSalaryDate" type="com.xxxx.server.pojo.SalaryDate" extends="BaseResultMap">
+        <id column="sid" property="id"/>
+        <result column="sname" property="name" />
+        <result column="sdate" property="date" />
+        <result column="ssal" property="sal" />
+        <result column="saward" property="award" />
+        <result column="spunishment" property="punishment" />
+        <association property="salary" javaType="com.xxxx.server.pojo.Salary">
+            <result column="basicSalary" property="basicSalary"/>
+        </association>
+        <association property="department" javaType="com.xxxx.server.pojo.Department">
+            <result column="dname" property="name"/>
+        </association>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, date, sal, award, punishment
+    </sql>
+    <select id="getAllSalaryDate" resultMap="AllSalaryDate">
+        select
+            sd.id sid,
+            sd.name sname,
+            sd.date sdate,
+            sd.sal ssal,
+            sd.award saward,
+            sd.punishment spunishment,
+            s.basicSalary ,
+            d.`name` dname
+        from
+        t_salary_date sd
+        LEFT JOIN t_employee e ON sd.`name`=e.`name`
+        LEFT JOIN t_salary s ON e.salaryId=s.id
+        LEFT JOIN t_department d ON e.departmentId=d.id
+        where e.id &lt; 4000
+        order by sd.id
+    </select>
+    <!--多条件查询-->
+    <select id="getSalaryDate1" parameterType="string" resultMap="AllSalaryDate">
+        select
+        sd.id sid,
+        sd.name sname,
+        sd.date sdate,
+        sd.sal ssal,
+        sd.award saward,
+        sd.punishment spunishment,
+        s.basicSalary ,
+        d.`name` dname
+        from
+        t_salary_date sd
+        LEFT JOIN t_employee e ON sd.`name`=e.`name`
+        LEFT JOIN t_salary s ON e.salaryId=s.id
+        LEFT JOIN t_department d ON e.departmentId=d.id
+        where e.id &lt; 4000
+        <if test="name!=null">
+            and sd.name = #{name}
+        </if>
+        <if test="dname!=null">
+            and d.name = #{dname}
+        </if>
+        order by sd.id
+    </select>
+
+
+
+</mapper>

@@ -16,38 +16,34 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @Author C
- * @Description JWT登录授权过滤器
- * @Date create in 2023/6/30 21:38
+ * JWT登录授权过滤器
  */
-public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
+public class JwtAuthencationTokenFilter extends OncePerRequestFilter {
+
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
-
     @Value("${jwt.tokenHead}")
     private String tokenHead;
-
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader(tokenHeader);
-        //判断是否能拿到请求，并且是否是以Bearer开头
-        if (authHeader!=null && authHeader.startsWith(tokenHead)){
-            //获取token
+        //存在token
+        if (null!=authHeader && authHeader.startsWith(tokenHead)){
             String authToken = authHeader.substring(tokenHead.length());
-            //根据token获取用户名
-            String userName = jwtTokenUtil.getUserNameFromToken(authToken);
+            String username = jwtTokenUtil.getUserNameFromToken(authToken);
             //token存在用户名但未登录
-            if (userName!=null&& SecurityContextHolder.getContext().getAuthentication()==null){
+            if (null!=username&& null== SecurityContextHolder.getContext().getAuthentication()){
                 //登录
-                UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 //验证token是否有效，重新设置用户对象
-                if(jwtTokenUtil.validateToken(authToken,userDetails)){
-                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+                if (jwtTokenUtil.validateToken(authToken,userDetails)){ //tokenHead->authToken
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
