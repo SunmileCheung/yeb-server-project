@@ -151,4 +151,33 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         RespPageBean respPageBean = new RespPageBean(employeeIPage.getTotal(), employeeIPage.getRecords());
         return respPageBean;
     }
+
+    /**
+     * 根据名字拆线呢员工
+     *
+     * @param name
+     * @return
+     */
+    @Override
+    public boolean selectByName(String name) {
+        List<Employee> employees = employeeMapper.selectByName(name);
+        if (employees.size() > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public RespPageBean getSalarySearch(Integer currentPage, Integer size, String ename, String dname) {
+
+        Page<Employee> page = new Page<>(currentPage, size);
+        IPage<Employee> salarySearchIPage = employeeMapper.getSalarySearch(page, ename, dname);
+        for (int i = 0; i < salarySearchIPage.getRecords().size(); i++) {
+            SalaryAdjust salaryAdjust = salarySearchIPage.getRecords().get(i).getSalaryAdjust();
+            if (salaryAdjust!=null){
+                salarySearchIPage.getRecords().get(i).getSalary().setAllSalary(salaryAdjust.getAfterSalary());
+            }
+        }
+        return new RespPageBean(salarySearchIPage.getTotal(), salarySearchIPage.getRecords());
+    }
 }

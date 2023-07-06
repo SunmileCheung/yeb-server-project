@@ -255,4 +255,9 @@
         </if>
     </select>
 
+    <!--查询是否有员工存在-->
+    <select id="selectByName" parameterType="string" resultType="com.xxxx.server.pojo.Employee">
+        select name from t_employee where name=#{name}
+    </select>
+
 </mapper>

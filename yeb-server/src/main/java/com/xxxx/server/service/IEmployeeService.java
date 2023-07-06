@@ -53,13 +53,8 @@ public interface IEmployeeService extends IService<Employee> {
      */
     List<Employee> getEmployee(Integer id);
 
-    /**
-     * 获取所有员工账套
-     * @param currentPage
-     * @param size
-     * @return
-     */
-    RespPageBean getEmployeeWithSalary(Integer currentPage, Integer size);
+
+    //RespPageBean getEmployeeWithSalary(Integer currentPage, Integer size);
 
 
 
@@ -68,5 +63,11 @@ public interface IEmployeeService extends IService<Employee> {
 
     //多条件查询
     RespPageBean getSalarySearch(Integer currentPage, Integer size, String ename, String dname);
+    /**
+     * 获取所有员工账套
+     * @param currentPage
+     * @param size
+     * @return
+     */
     RespPageBean getEmployeeWithSalary(Integer currentPage, Integer size,String empName,String dname);
 }

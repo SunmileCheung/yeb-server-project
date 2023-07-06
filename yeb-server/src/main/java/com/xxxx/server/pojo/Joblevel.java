@@ -1,6 +1,5 @@
 package com.xxxx.server.pojo;
 
-<<<<<<< HEAD
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -14,7 +13,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-=======
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -28,26 +26,18 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
->>>>>>> 初始化仓库提交
 /**
  * <p>
  * 
  * </p>
  *
  * @author huyelin
-<<<<<<< HEAD
  * @since 2023-06-30
- */
-@Data
-@EqualsAndHashCode(callSuper = false)
-=======
- * @since 2022-06-23
  */
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false,of = "name")
->>>>>>> 初始化仓库提交
 @Accessors(chain = true)
 @TableName("t_joblevel")
 @ApiModel(value="Joblevel对象", description="")

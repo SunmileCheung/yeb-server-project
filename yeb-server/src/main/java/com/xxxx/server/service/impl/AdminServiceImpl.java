@@ -54,22 +54,6 @@ import java.util.Map;
  * @author huyelin
  * @since 2022-06-23
  */
-@Service
-public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
-    @Autowired
-    private AdminMapper adminMapper;
-    @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
-    @Autowired
-    private RoleMapper roleMapper;
-    @Autowired
-    private AdminRoleMapper adminRoleMapper;
 
     /**
      * 登入之后返回token
@@ -95,6 +79,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Autowired
     private RoleMapper roleMapper;
+
+        @Autowired
+        private AdminRoleMapper adminRoleMapper;
 
     /**
      * 登录之后返回token
