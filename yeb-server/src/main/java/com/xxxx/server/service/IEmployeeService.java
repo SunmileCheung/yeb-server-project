@@ -43,7 +43,7 @@ public interface IEmployeeService extends IService<Employee> {
 
     /**
      * 查询员工
-     * @param o
+     * @param
      */
     List<Employee> getEmployee(Integer id);
 
@@ -54,4 +54,12 @@ public interface IEmployeeService extends IService<Employee> {
      * @return
      */
     RespPageBean getEmployeeWithSalary(Integer currentPage, Integer size);
+
+    List<Employee> countEmployee();
+
+    List<Employee> countDepartmentId();
+
+    List<Employee> countJobLevelId();
+
+    List<Employee> integral();
 }

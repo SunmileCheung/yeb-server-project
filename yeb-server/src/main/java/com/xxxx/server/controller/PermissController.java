@@ -48,7 +48,7 @@ public class PermissController {
         return RespBean.error("添加失败！");
     }
 
-    @ApiOperation(value = "删除角色")
+    @ ApiOperation(value = "删除角色")
     @DeleteMapping("/role/{rid}")
     public RespBean deleteRole(@PathVariable Integer rid){
         if (roleService.removeById(rid)){

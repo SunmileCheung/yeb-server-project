@@ -3,6 +3,7 @@ package com.xxxx.server.controller;
 import com.xxxx.server.pojo.Ec;
 import com.xxxx.server.pojo.RespBean;
 import com.xxxx.server.service.IEcService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,16 @@ public class EcController {
         }
         return RespBean.error("添加失败！");
     }
-
+   /* @ApiOperation(value = "添加奖惩")
+    @PostMapping("/")
+    public RespBean addRc1(@RequestBody Ec ec){
+        ec.setEcDate(LocalDateTime.now());
+        if(ecService.save(ec)){
+            return RespBean.success("添加成功！");
+        }
+        return RespBean.error("添加失败！");
+    }
+*/
     @ApiOperation(value = "更新奖惩")
     @PutMapping("/")
     public RespBean updateEc(@RequestBody Ec ec){

@@ -1,25 +1,25 @@
 package com.xxxx.server.controller;
 
 
-        import cn.afterturn.easypoi.excel.ExcelExportUtil;
-        import cn.afterturn.easypoi.excel.ExcelImportUtil;
-        import cn.afterturn.easypoi.excel.entity.ExportParams;
-        import cn.afterturn.easypoi.excel.entity.ImportParams;
-        import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
-        import com.xxxx.server.pojo.*;
-        import com.xxxx.server.service.*;
-        import io.swagger.annotations.ApiOperation;
-        import org.apache.poi.ss.usermodel.Workbook;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.web.bind.annotation.*;
-        import org.springframework.web.multipart.MultipartFile;
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
+import com.xxxx.server.pojo.*;
+import com.xxxx.server.service.*;
+import io.swagger.annotations.ApiOperation;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-        import javax.servlet.ServletOutputStream;
-        import javax.servlet.http.HttpServletResponse;
-        import java.io.IOException;
-        import java.net.URLEncoder;
-        import java.time.LocalDate;
-        import java.util.List;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * <p>
@@ -182,5 +182,25 @@ public class EmployeeController {
             e.printStackTrace();
         }
         return RespBean.error("导入失败！");
+    }
+    @ApiOperation(value = "统计学历")
+    @GetMapping("/count")
+    public List<Employee>count(){
+        return employeeService.countEmployee();
+    }
+    @ApiOperation(value = "统计部门")
+    @GetMapping("/countDepartment")
+    public List<Employee>countDepartment(){
+        return employeeService.countDepartmentId();
+    }
+    @ApiOperation(value = "统计职业")
+    @GetMapping("/countJobLevelId")
+    public List<Employee>countJobLevelId(){
+        return employeeService.countJobLevelId();
+    }
+    @ApiOperation(value = "奖惩统计")
+    @GetMapping("/integral")
+    public List<Employee>integral(){
+        return employeeService.integral();
     }
 }

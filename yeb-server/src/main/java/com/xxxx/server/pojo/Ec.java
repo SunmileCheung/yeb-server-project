@@ -34,23 +34,21 @@ public class Ec implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-    @ApiModelProperty(value = "奖惩等级")
-    @Excel(name = "奖惩等级")
+    @ApiModelProperty(value = "奖惩类别")
+    @Excel(name = "奖惩类别")
     @NonNull
-    private String ecType;
-
-    @ApiModelProperty(value = "奖惩名称")
-    @Excel(name = "奖惩名称")
-    @NonNull
-    private String ecName;
-
-    @ApiModelProperty(value = "绩效变更")
-    @Excel(name = "绩效变更")
-    private Double ecPoint;
+    private Integer ecType;
 
     @ApiModelProperty(value = "创建/更新时间")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private LocalDateTime ecDate;
 
+    @ApiModelProperty(value = "奖惩名称")
+    @Excel(name = "奖惩名称")
+    @NonNull
+    private String ecTypeName;
 
+    @ApiModelProperty(value = "绩效变更")
+    @Excel(name = "绩效变更")
+    private Integer ecPoint;
 }

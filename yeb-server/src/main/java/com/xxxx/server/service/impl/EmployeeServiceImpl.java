@@ -1,5 +1,4 @@
 package com.xxxx.server.service.impl;
-import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
@@ -129,5 +129,25 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         IPage<Employee> employeeIPage = employeeMapper.getEmployeeWithSalary(page);
         RespPageBean respPageBean = new RespPageBean(employeeIPage.getTotal(), employeeIPage.getRecords());
         return respPageBean;
+    }
+
+    @Override
+    public List<Employee> countEmployee() {
+        return employeeMapper.countEmployee();
+    }
+
+    @Override
+    public List<Employee> countDepartmentId() {
+        return employeeMapper.countDepartmentId();
+    }
+
+    @Override
+    public List<Employee> countJobLevelId() {
+        return employeeMapper.countJobLevelId();
+    }
+
+    @Override
+    public List<Employee> integral() {
+        return employeeMapper.integral();
     }
 }

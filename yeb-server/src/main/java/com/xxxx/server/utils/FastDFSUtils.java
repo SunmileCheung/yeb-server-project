@@ -1,6 +1,5 @@
 package com.xxxx.server.utils;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.csource.fastdfs.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

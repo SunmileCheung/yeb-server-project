@@ -24,6 +24,7 @@ import java.util.List;
 @RequestMapping("/system/basic/joblevel")
 public class JoblevelController {
 
+
     @Autowired
     private IJoblevelService joblevelService;
 
@@ -69,5 +70,6 @@ public class JoblevelController {
         }
         return RespBean.error("删除失败！");
     }
+
 
 }

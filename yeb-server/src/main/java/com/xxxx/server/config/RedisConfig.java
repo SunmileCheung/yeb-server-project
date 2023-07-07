@@ -9,7 +9,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 public class RedisConfig {
-    @Bean
+   /* @Bean
     public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory connectionFactory){
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         //String类型 key序列器
@@ -19,6 +19,20 @@ public class RedisConfig {
         //Hash类型 key序列器
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         //Hash类型 value序列器
+        redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.setConnectionFactory(connectionFactory);
+        return redisTemplate;
+    }*/
+    @Bean
+    public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory connectionFactory){
+        RedisTemplate<String,Object>redisTemplate = new RedisTemplate<>();
+        //String类型key序列化
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        //String类型value序列化
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        //Hash类型key序列化
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        //Hash类型value序列化
         redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         redisTemplate.setConnectionFactory(connectionFactory);
         return redisTemplate;
